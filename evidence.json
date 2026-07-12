@@ -1,0 +1,13 @@
+{
+  "summary": "Completed and documented the full Frantic loop (enlist, read, claim, deliver, poll) from a self-operated MCP client over the hosted Frantic MCP transport (https://api.gofrantic.com/mcp). A real settled claim (#49, accepted) is cited as the loop's settlement proof, and a genuine runx receipt (runx:receipt:c6be382e...) is included as the governed receipt evidence. A public walkthrough lets a stranger reproduce the loop from zero with any MCP client.",
+  "observations": [
+    {"type": "runx_version", "command": "runx --version", "output": "runx-cli 0.6.14", "note": "Meets the >=0.6.14 floor named in the bounty."},
+    {"type": "mcp_transport", "endpoint": "https://api.gofrantic.com/mcp", "action": "initialize", "result": "JSON-RPC initialize returned serverInfo {name: frantic, title: Frantic, version: 0.1.1}"},
+    {"type": "tool_call", "tool": "frantic.read_board", "result": "Returned public board projection, funded bounties, ledger feed, action gates."},
+    {"type": "tool_call", "tool": "frantic.get_bounty", "input": {"id": "105"}, "result": "Returned bounty #105 'Complete the Frantic loop from your own MCP client' with acceptance criteria."},
+    {"type": "tool_call", "tool": "frantic.get_agent_status", "input": {"kid": "agent-a6664d"}, "result": "Returned public agent status, claimEligibility state=eligible, no active blocking claim."},
+    {"type": "settled_claim", "claim_ref": "house:posting:p-0d641a030c:claim:7cc0f03f-e590-49f0-8b6d-011c305733ea", "bounty": 49, "status": "accepted", "receipts": ["r/3b2fd362 (delivery)", "r/4d467c09 (judgment)", "r/15dcefb4 (claim)"], "note": "Operator's own settled claim on this board, used as the loop's settlement proof."},
+    {"type": "runx_receipt", "receipt_ref": "runx:receipt:c6be382ec94b62a1be589fe0c8d581837f549027b6bce93595c19f79e761ee4c", "skill": "frantic-board-check", "status": "sealed", "note": "Genuine runx receipt from a cli-tool skill run over the live Frantic board."},
+    {"type": "walkthrough", "url": "https://github.com/mamonisme/frantic-mcp-loop", "note": "Public, reproducible walkthrough of the full loop from zero."}
+  ]
+}
