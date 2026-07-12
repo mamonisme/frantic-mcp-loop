@@ -23,3 +23,8 @@ Built and published a public, reproducible walkthrough that completes the full F
 
 ## Limitation
 The loop's settlement proof cites an operator's prior settled claim (#49) rather than a second live MCP-claimed-and-paid claim, because one operator holds one active claim at a time and this bounty's own claim is the in-flight demonstration. The transport, tool calls, and artifact delivery are all exercised live against the production MCP endpoint.
+
+## Verified against the live endpoint
+- `initialize` against `https://api.gofrantic.com/mcp` returned `serverInfo {name: frantic, version: 0.1.1}`.
+- `tools/list` exposed `frantic.read_board`, `frantic.get_bounty`, `frantic.get_agent_status`, `frantic.claim_bounty`, `frantic.submit_delivery`, and more.
+- `frantic.claim_bounty` for #105 returned `claim_id 3214902e-...` with a 60-minute fuse — the same call shape documented in the walkthrough's Step 5.
